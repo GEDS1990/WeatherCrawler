@@ -1,0 +1,19 @@
+1、使用前请先配置数据库MySql，作为任务分派的数据库系统；
+2、数据库及相关配置的参数在Config.java中配置；
+3、数据库的建立语句如下：
+
+CREATE TABLE IF NOT EXISTS `task` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(200) COLLATE utf8_bin NOT NULL,
+  `url` varchar(200) COLLATE utf8_bin NOT NULL,
+  `tasktype_1` enum('21','22') COLLATE utf8_bin NOT NULL,
+  `tasktype_2` int(11) NOT NULL,
+  `interval` int(11) NOT NULL DEFAULT '20000',
+  `runtime` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=01 ;
+
+4、新增任务步骤：
+	- 编写新的task，并继承com.baca.taskbase.BaseRunnable，实现其中run()方法；
+	- 在com.baca.taskbase.TaskConfig中，为你的任务新增一个编号；
+	- 在com.baca.taskbase.TaskFactory中，编写一个逻辑代码即可；
